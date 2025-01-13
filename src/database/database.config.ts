@@ -13,11 +13,17 @@ export const databaseConfig = {
   username: process.env.DB_USER || 'name',
   password: process.env.DB_PASSWORD || 'password',
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+  migrations: [__dirname, '/../migrations/*{.ts,.js}'],
   synchronize: false,
 };
+
+export const dataSource = new DataSource({
+  ...databaseConfig,
+  migrations: ['dist/migrations/*{.ts,.js}'],
+});
 
 export default registerAs(
   'database',
   (): TypeOrmModuleOptions => databaseConfig,
 );
-export const connectionDatabase = new DataSource(databaseConfig);
+// export const connectionDatabase = new DataSource(databaseConfig);

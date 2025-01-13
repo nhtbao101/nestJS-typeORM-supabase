@@ -1,0 +1,14 @@
+export enum PAYMENT_STATUS {
+  UNPAID = 1,
+  PAID,
+  READY,
+  CANCEL,
+  SHIPPED,
+  COMPLETED,
+}
+
+export enum PAYMENT_METHOD {
+  COD = 1,
+  ONLINE_BANKING,
+  CREDIT_CARD,
+}
