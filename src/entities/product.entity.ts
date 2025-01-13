@@ -1,7 +1,14 @@
-import { Column, Entity, JoinTable, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 import { VariantEntity } from './variant.entity';
+import { OrderItem } from './order-item.entity';
 
 @Entity()
 export class Product {
@@ -44,4 +51,8 @@ export class Product {
   @JoinTable()
   @ApiProperty()
   variant: VariantEntity;
+
+  @OneToMany(() => OrderItem, (orderItem: OrderItem) => orderItem)
+  @JoinTable()
+  orderItems: OrderItem[];
 }
