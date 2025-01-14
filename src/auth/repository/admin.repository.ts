@@ -5,7 +5,7 @@ import Admin from 'src/entities/admin.entity';
 
 @Injectable()
 export class AdminRepository extends Repository<Admin> {
-  constructor(public dataSource: DataSource) {
+  constructor(private dataSource: DataSource) {
     super(Admin, dataSource.createEntityManager());
   }
 }

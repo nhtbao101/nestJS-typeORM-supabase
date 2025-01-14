@@ -28,8 +28,6 @@ export class AuthService {
     const checkUserExist = await this.userRepository.findOneBy({
       email: req.email,
     });
-
-    console.log('checkUserExist', checkUserExist);
     if (checkUserExist) {
       throw new HttpException(
         ERROR_MESSAGE.EMAIL_EXIST,
@@ -39,9 +37,7 @@ export class AuthService {
     const user = this.userRepository.create(req);
 
     const salt = await bcrypt.genSalt();
-
     const hashPassword = await bcrypt.hash(req.password, salt);
-
     const result = await this.userRepository.save({
       ...user,
       password: hashPassword,
@@ -60,8 +56,12 @@ export class AuthService {
     }
 
     return {
-      ...user,
-      token: this.jwtService.sign(user),
+      user: new User(user),
+      token: await this.jwtService.signAsync({
+        id: user.id,
+        email: user.email,
+        userRole: user.userRole,
+      }),
     };
   }
 
@@ -92,15 +92,11 @@ export class AuthService {
       email: req.email,
     });
 
-    console.log('admin', admin);
-
     if (!admin) {
       throw new NotFoundException(ERROR_MESSAGE.ACCOUNT_NOT_FOUND);
     }
-    console.log('req.password', req.password, admin.password);
     const isMatchPassword = await bcrypt.compare(req.password, admin.password);
 
-    console.log('isMatchPassword', isMatchPassword);
     if (!isMatchPassword) {
       throw new HttpException(
         ERROR_MESSAGE.ACCOUNT_NOT_FOUND,

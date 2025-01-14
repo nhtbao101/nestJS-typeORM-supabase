@@ -1,15 +1,14 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
+@Global()
 @Module({
   imports: [
-    // UsersModule,
     JwtModule.register({
       global: true,
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60s' },
+      secret: process.env.JWT_SECRET || 'default-secret',
+      signOptions: { expiresIn: '7d' }, // e.g. 30s, 7d, 24h
     }),
   ],
-  providers: [],
 })
-export class SharedModule {}
+export class ConfigModule {}
