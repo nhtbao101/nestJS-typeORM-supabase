@@ -1,12 +1,13 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
+
 import { UserService } from './user.service';
-// import { UserGuard } from 'src/auth/guard/user.guard';
 import User from 'src/entities/user.entity';
+import UserGuard from 'src/auth/guard/user.guard';
 
 @Controller('/users/')
 @ApiBearerAuth()
-// @UseGuards(UserGuard)
+@UseGuards(UserGuard)
 export class UserController {
   constructor(private userService: UserService) {}
 

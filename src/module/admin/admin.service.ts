@@ -8,7 +8,6 @@ export class AdminService {
   constructor(private adminRepository: AdminRepository) {}
 
   async getAdmins() {
-    console.log('get admins service');
     return await this.adminRepository.find();
   }
 
@@ -19,7 +18,6 @@ export class AdminService {
   }
 
   async getAdminByEmail(email: string) {
-    console.log('get user by email', email);
     return await this.adminRepository.findOneBy({
       email: email,
     });

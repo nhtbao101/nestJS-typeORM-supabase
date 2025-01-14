@@ -26,4 +26,3 @@ export default registerAs(
   'database',
   (): TypeOrmModuleOptions => databaseConfig,
 );
-// export const connectionDatabase = new DataSource(databaseConfig);

@@ -5,17 +5,19 @@ import { AdminService } from './admin.service';
 import Admin from 'src/entities/admin.entity';
 import { SignUpAdminDto } from 'src/auth/dto/signup.dto';
 import AdminGuard from 'src/auth/guard/admin.guard';
+import { Roles } from 'src/auth/decorator/role';
+import { Role } from 'src/constants/role';
+import { RolesGuard } from 'src/auth/guard/role.guard';
 
 @Controller('/admin/')
-@UseGuards(AdminGuard)
+@UseGuards(AdminGuard, RolesGuard)
 @ApiBearerAuth()
-// @Roles(Role.SUPER_ADMIN, Role.ADMIN)
+@Roles(Role.SUPER_ADMIN, Role.ADMIN)
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   @Get()
   async getAdmins(): Promise<Admin[]> {
-    console.log('get admins');
     const adminList = await this.adminService.getAdmins();
     return adminList.map((admin: Admin) => new Admin(admin));
   }
