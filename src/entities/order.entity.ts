@@ -37,7 +37,7 @@ export class Order {
   @Column({ name: 'shipping_date' })
   shippingDate: Date;
 
-  @Column({ name: 'shipping_receive_date' })
+  @Column({ name: 'shipping_received_date' })
   shippingReceivedDate: Date;
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem)
