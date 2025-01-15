@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { SignUpUserDto } from 'src/auth/dto/signup.dto';
 import { UserRepository } from 'src/auth/repository/user.repository';
+import { ERROR_MESSAGE } from 'src/constants/error-message';
 
 @Injectable()
 export class UserService {
@@ -18,5 +19,17 @@ export class UserService {
 
   async updateUserByAdmin(id: number, data: SignUpUserDto) {
     return await this.userRepository.update(id, data);
+  }
+
+  async deleteUserByAdmin(id: number) {
+    const user = this.userRepository.findOneBy({
+      id: id,
+    });
+    if (!user) {
+      throw new HttpException(
+        ERROR_MESSAGE.USER_NOT_FOUND,
+        HttpStatus.NOT_FOUND,
+      );
+    }
   }
 }

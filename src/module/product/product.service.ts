@@ -20,10 +20,7 @@ export class ProductService {
   }
 
   async createProduct(productDto: ProductDto): Promise<Product> {
-    console.log('productDto');
-    // const product = this.productRepository.create(productDto);
     const product = plainToInstance(Product, productDto);
-    console.log('product', product);
     return await this.productRepository.save(product);
   }
 
