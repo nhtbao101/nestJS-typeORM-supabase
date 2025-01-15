@@ -3,7 +3,6 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { AdminService } from './admin.service';
 import Admin from 'src/entities/admin.entity';
-import { SignUpAdminDto } from 'src/auth/dto/signup.dto';
 import AdminGuard from 'src/auth/guard/admin.guard';
 import { Roles } from 'src/auth/decorator/role';
 import { Role } from 'src/constants/role';
@@ -33,7 +32,7 @@ export class AdminController {
   }
 
   @Put(':id')
-  async updateAdmin(id: number, data: SignUpAdminDto) {
-    return await this.adminService.updateAdmin(id, data);
+  async updateAdmin(data: Admin) {
+    return await this.adminService.updateAdmin(data);
   }
 }

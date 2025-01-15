@@ -29,12 +29,12 @@ export class UserService {
     // return plainToInstance(UserEntity, user);
   }
 
-  // async updateUser(data: SignUpUserDto) {
-  //   return this.prisma.user.update({
-  //     where: {
-  //       email: data.email,
-  //     },
-  //     data: data,
-  //   });
-  // }
+  async updateUser(data: User) {
+    return this.userRepository.update(
+      {
+        id: data.id,
+      },
+      data,
+    );
+  }
 }

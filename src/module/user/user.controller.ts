@@ -1,4 +1,4 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
@@ -21,8 +21,8 @@ export class UserController {
     return this.userService.getUserById(id);
   }
 
-  // @Put(':id')
-  // async updateUser(data) {
-  //   return this.userService.updateUser(data);
-  // }
+  @Put(':id')
+  async updateUser(@Body() data: User) {
+    return this.userService.updateUser(data);
+  }
 }

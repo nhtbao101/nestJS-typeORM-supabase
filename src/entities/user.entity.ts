@@ -52,8 +52,7 @@ export default class User {
   @ApiProperty()
   avatar?: string;
 
-  @OneToMany(() => Order, (order) => order)
-  @IsOptional()
+  @OneToMany(() => Order, (order) => order.user)
   @ApiProperty()
   orders?: Order[];
 

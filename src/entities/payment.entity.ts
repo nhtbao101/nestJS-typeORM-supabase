@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Order } from './order.entity';
@@ -24,8 +24,8 @@ export class Payment {
   @Column({ name: 'payment_method' })
   paymentMethod: number;
 
-  @OneToMany(() => Order, (order) => order.payment)
-  @JoinColumn({ name: 'orderId' })
+  @OneToOne(() => Order)
+  @JoinColumn({ name: 'order_id' })
   order: Order[];
 
   @Column({ name: 'created_at' })

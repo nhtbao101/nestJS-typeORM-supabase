@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { SignUpAdminDto } from 'src/auth/dto/signup.dto';
 import { AdminRepository } from 'src/auth/repository/admin.repository';
+import Admin from 'src/entities/admin.entity';
 
 @Injectable()
 export class AdminService {
@@ -22,7 +22,7 @@ export class AdminService {
       email: email,
     });
   }
-  async updateAdmin(id: number, data: SignUpAdminDto) {
-    return await this.adminRepository.update(id, data);
+  async updateAdmin(data: Admin) {
+    return await this.adminRepository.update({ id: data.id }, data);
   }
 }

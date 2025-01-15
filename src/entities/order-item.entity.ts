@@ -25,11 +25,11 @@ export class OrderItem {
   @Column()
   updatedAt: Date;
 
-  @ManyToOne(() => Product, (product: Product) => product.orderItems)
-  @JoinColumn({ name: 'productId' })
+  @ManyToOne(() => Product, (product) => product.orderItems)
+  @JoinColumn({ name: 'product_id' })
   product: Product;
 
-  @ManyToOne(() => Order, (order: Order) => order.orderItems)
-  @JoinColumn({ name: 'orderId' })
+  @ManyToOne(() => Order, (order) => order.orderItems)
+  @JoinColumn({ name: 'order_id' })
   order: Order;
 }
