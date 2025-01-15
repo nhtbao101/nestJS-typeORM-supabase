@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -10,11 +10,16 @@ import {
 
 import { OrderItem } from './order-item.entity';
 import { Payment } from './payment.entity';
+import User from './user.entity';
 
 @Entity()
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
+
+  //missing in db
+  @Column()
+  slug: string;
 
   @Column({ name: 'customer_id' })
   customerId: number;
@@ -41,12 +46,15 @@ export class Order {
   shippingReceivedDate: Date;
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem)
-  @JoinTable()
   orderItems: OrderItem[];
 
   @OneToOne(() => Payment, (payment) => payment.order, {
     cascade: true,
   })
-  @JoinColumn({ name: 'paymentId' })
+  @JoinColumn({ name: 'payment_id' })
   payment: Payment;
+
+  @ManyToOne(() => User, (user) => user.orders)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }

@@ -1,12 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
+import { Expose, Type } from 'class-transformer';
+
+import { VariantDto } from './variant';
 
 export class ProductDto {
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({ example: 'slug-name' })
-  slug: string;
-
+  @Length(5, 100)
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: 'Product name' })
@@ -29,7 +35,8 @@ export class ProductDto {
 
   @IsInt()
   @IsNotEmpty()
-  @ApiProperty({ example: 1 })
+  @ApiProperty({ example: 1, name: 'category_id' })
+  @Expose({ name: 'category_id' })
   categoryId: number;
 
   @IsString()
@@ -38,6 +45,8 @@ export class ProductDto {
   image: string;
 
   @IsOptional()
-  @ApiProperty({ example: [] })
-  variant?: string[];
+  @IsArray()
+  @Type(() => VariantDto)
+  @ApiProperty({ example: VariantDto })
+  variant?: VariantDto[];
 }
