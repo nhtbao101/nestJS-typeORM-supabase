@@ -1,4 +1,4 @@
-import { Controller, Get, Put, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
@@ -25,5 +25,10 @@ export class UserController {
   @Put(':id')
   async updateUserByAdmin(id: number, data: User) {
     return await this.userService.updateUserByAdmin(id, data);
+  }
+
+  @Delete(':id')
+  async deleteUserByAdmin(id: number) {
+    return await this.userService.deleteUserByAdmin(id);
   }
 }
