@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import OrderRepository from 'src/module/order/order.repository';
+import OrderRepository from 'src/repository/order.repository';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
 

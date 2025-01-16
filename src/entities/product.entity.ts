@@ -10,11 +10,11 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
+import { Expose } from 'class-transformer';
 
 import { OrderItem } from './order-item.entity';
 import { Variant } from './variant.entity';
 import { Category } from './category.entity';
-import { Expose } from 'class-transformer';
 import { generateSlug } from 'src/shared/helper';
 
 @Entity()

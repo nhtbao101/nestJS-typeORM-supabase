@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsString,
+  Length,
 } from 'class-validator';
 
 export class SignUpUserDto {
@@ -48,16 +49,19 @@ export class SignUpUserDto {
 export class SignUpAdminDto {
   @IsEmail()
   @IsNotEmpty()
+  @Length(8, 50)
   @ApiProperty({ example: 'email@gmail.com' })
   email: string;
 
   @IsString()
   @IsNotEmpty()
+  @Length(6, 50)
   @ApiProperty({ example: 'Abcd1234' })
   password: string;
 
   @IsString()
   @IsNotEmpty()
+  @Length(4, 50)
   @ApiProperty({ example: 'Admin name' })
   fullName: string;
 
@@ -68,6 +72,7 @@ export class SignUpAdminDto {
 
   @IsOptional()
   @IsNotEmpty()
+  @IsInt()
   @ApiProperty({ example: 1 })
   roleId: number;
 }

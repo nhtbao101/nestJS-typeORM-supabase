@@ -18,8 +18,8 @@ export class Order {
   id: number;
 
   //missing in db
-  @Column()
-  slug: string;
+  // @Column()
+  // slug: string;
 
   @Column({ name: 'customer_id' })
   customerId: number;
@@ -51,10 +51,10 @@ export class Order {
   @OneToOne(() => Payment, (payment) => payment.order, {
     cascade: true,
   })
-  @JoinColumn({ name: 'payment_id' })
+  @JoinColumn({ name: 'id' })
   payment: Payment;
 
   @ManyToOne(() => User, (user) => user.orders)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'customer_id' })
   user: User;
 }

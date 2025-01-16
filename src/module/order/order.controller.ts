@@ -1,17 +1,8 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Put,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import AdminGuard from 'src/auth/guard/admin.guard';
 import UserGuard from 'src/auth/guard/user.guard';
-import { Order } from 'src/entities/order.entity';
 import { OrderService } from './order.service';
 import { OrderDto } from '../dto/order.dto';
 
@@ -34,10 +25,5 @@ export class OrderController {
   @Post()
   async createOrder(@Body() order: OrderDto) {
     return this.orderService.createOrder(order);
-  }
-
-  @Put(':id')
-  async updateOrder(@Body() order: Order) {
-    return this.orderService.updateOrder(order);
   }
 }

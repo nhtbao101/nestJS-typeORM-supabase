@@ -11,11 +11,6 @@ import UserGuard from 'src/auth/guard/user.guard';
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Get()
-  async getUsers(): Promise<User[]> {
-    return this.userService.getUsers();
-  }
-
   @Get(':id')
   async getUser(@Param() id: number) {
     return this.userService.getUserById(id);

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsInt, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsInt, IsOptional, IsString, Min } from 'class-validator';
 
 export class VariantDto {
   @IsArray()
@@ -18,10 +18,12 @@ export class VariantDto {
   material?: string[];
 
   @IsInt()
+  @Min(1)
   @ApiProperty({ example: 990 })
   price: number;
 
   @IsInt()
+  @Min(1)
   @ApiProperty({ example: 10 })
   quantity: number;
 
