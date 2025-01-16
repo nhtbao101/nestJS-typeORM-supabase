@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
 import { Column } from 'typeorm';
 
 export class OrderDto {
@@ -15,6 +15,7 @@ export class OrderDto {
 
   @IsInt()
   @IsNotEmpty()
+  @Min(0)
   @ApiProperty({ example: 0 })
   total: number;
 
@@ -27,4 +28,10 @@ export class OrderDto {
   @IsNotEmpty()
   @ApiProperty({ name: 'shipping_received_date' })
   shippingReceivedDate: Date;
+
+  @IsString()
+  @Column({ name: 'shipping_address' })
+  @IsNotEmpty()
+  @ApiProperty({ name: 'shipping_address' })
+  shippingAddress: string;
 }

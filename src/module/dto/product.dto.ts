@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsString,
   Length,
+  Min,
 } from 'class-validator';
 import { Expose, Type } from 'class-transformer';
 
@@ -20,16 +21,19 @@ export class ProductDto {
 
   @IsString()
   @IsNotEmpty()
+  @Length(5, 1000)
   @ApiProperty({ example: 'Product description' })
   description: string;
 
   @IsInt()
   @IsNotEmpty()
+  @Min(1)
   @ApiProperty({ example: 100 })
   price: number;
 
   @IsInt()
   @IsNotEmpty()
+  @Min(1)
   @ApiProperty({ example: 99 })
   quantity: number;
 

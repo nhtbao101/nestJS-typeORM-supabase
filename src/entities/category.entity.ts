@@ -1,5 +1,12 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Product } from './product.entity';
+import { generateSlug } from 'src/shared/helper';
 
 @Entity()
 export class Category {
@@ -26,4 +33,11 @@ export class Category {
 
   @OneToMany(() => Product, (product) => product.category)
   product: Product;
+
+  @BeforeInsert()
+  createSlug() {
+    this.slug = generateSlug(
+      this.name + '-' + parseFloat(`${Math.random() * 1000}`).toFixed(2),
+    );
+  }
 }

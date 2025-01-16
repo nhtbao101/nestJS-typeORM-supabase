@@ -1,19 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
 
 export class CategoryDto {
   @IsString()
   @IsNotEmpty()
+  @Length(4, 50)
   @ApiProperty({ example: 'Category name' })
   name: string;
 
-  // @IsString()
-  // @IsNotEmpty()
-  // @ApiProperty({ example: 'slug-name' })
-  // slug: string;
+  @IsOptional()
+  @IsString()
+  @ApiProperty({ example: 'slug-name' })
+  slug?: string;
 
   @IsString()
   @IsNotEmpty()
+  @Length(10, 1000)
   @ApiProperty({ example: 'Category description' })
   description: string;
 
