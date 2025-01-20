@@ -11,7 +11,6 @@ import {
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { ProductService } from './product.service';
-import { Product } from 'src/entities/product.entity';
 import AdminGuard from 'src/auth/guard/admin.guard';
 import { ProductDto } from 'src/module/dto/product.dto';
 
@@ -20,8 +19,8 @@ export class ProductController {
   constructor(private productService: ProductService) {}
 
   @Post('create')
-  async createProduct(@Body() data: ProductDto) {
-    return await this.productService.createProduct(data);
+  async createProduct(@Body() product: ProductDto) {
+    return await this.productService.createProduct(product);
   }
 
   @Get()
@@ -30,21 +29,21 @@ export class ProductController {
   }
 
   @Get(':id')
-  async getProductById(@Param() param: { id: number }) {
-    return await this.productService.getProductById(param.id);
+  async getProductById(@Param('id') id: number) {
+    return await this.productService.getProductById(id);
   }
 
   @UseGuards(AdminGuard)
   @ApiBearerAuth()
   @Put(':id/update')
-  async updateProduct(@Body() data: Product) {
-    return await this.productService.updateProduct(data);
+  async updateProduct(@Param('id') id: number, @Body() data: ProductDto) {
+    return await this.productService.updateProduct(id, data);
   }
 
   @UseGuards(AdminGuard)
   @ApiBearerAuth()
   @Delete(':id/delete')
-  async deleteProduct(@Param() param: { id: number }) {
-    return await this.productService.deleteProduct(param.id);
+  async deleteProduct(@Param('id') id: number) {
+    return await this.productService.deleteProduct(id);
   }
 }

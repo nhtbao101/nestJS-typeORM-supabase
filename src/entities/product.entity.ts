@@ -54,9 +54,9 @@ export class Product {
   @ApiProperty()
   quantity: number;
 
+  @Expose()
   @Column({ name: 'category_id' })
   @ApiProperty({ name: 'category_id' })
-  @Expose()
   categoryId: number;
 
   @Expose()
@@ -70,20 +70,28 @@ export class Product {
   @ApiProperty()
   updatedAt: Date;
 
-  @ManyToOne(() => Category)
+  @ManyToOne(() => Category, (category) => category.product)
   @JoinColumn({ name: 'category_id' })
   @ApiProperty()
   category: Category;
 
-  @OneToMany(() => Variant, (variant) => variant.product, {
-    cascade: true,
-    nullable: true,
-  })
+  @OneToMany(
+    () => Variant,
+    (variant) => {
+      console.log('variant', variant);
+      return variant.product;
+    },
+    {
+      nullable: true,
+    },
+  )
   @ApiProperty()
   @JoinColumn({ name: 'id' })
-  variant?: Variant[];
+  variant?: any;
 
-  @OneToMany(() => OrderItem, (orderItem: OrderItem) => orderItem.product)
+  @OneToMany(() => OrderItem, (orderItem: OrderItem) => orderItem.product, {
+    nullable: true,
+  })
   @ApiProperty()
   @JoinColumn({ name: 'id' })
   orderItems?: OrderItem[];

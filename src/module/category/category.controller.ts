@@ -14,7 +14,7 @@ export class CategoryController {
   }
 
   @Get(':id')
-  async getCategory(@Param() id: number) {
-    return this.CategoryService.getCategory(id);
+  async getCategoryById(@Param('id') id: number) {
+    return this.CategoryService.getCategoryById(id);
   }
 }
