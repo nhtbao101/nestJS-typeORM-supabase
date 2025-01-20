@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { SignUpUserDto } from 'src/auth/dto/signup.dto';
 import { UserRepository } from 'src/auth/repository/user.repository';
-import { ERROR_MESSAGE } from 'src/constants/error-message';
+import { ErrorMsg } from 'src/constants/error-message';
 
 @Injectable()
 export class UserService {
@@ -26,10 +26,7 @@ export class UserService {
       id: id,
     });
     if (!user) {
-      throw new HttpException(
-        ERROR_MESSAGE.USER_NOT_FOUND,
-        HttpStatus.NOT_FOUND,
-      );
+      throw new HttpException(ErrorMsg.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
   }
 }

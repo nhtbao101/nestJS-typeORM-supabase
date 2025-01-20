@@ -12,11 +12,11 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { CategoryService } from './category.service';
 import AdminGuard from 'src/auth/guard/admin.guard';
-import { Category } from 'src/entities/category.entity';
 import { CategoryDto } from 'src/module/dto/category.dto';
 
 @Controller('/manage/category/')
 @ApiBearerAuth()
+@UseGuards(AdminGuard)
 export class CategoryController {
   constructor(private CategoryService: CategoryService) {}
 
@@ -26,25 +26,22 @@ export class CategoryController {
   }
 
   @Get(':id')
-  async getCategory(@Param() id: number) {
-    return this.CategoryService.getCategory(id);
+  async getCategoryById(@Param('id') id: number) {
+    return this.CategoryService.getCategoryById(id);
   }
 
-  @UseGuards(AdminGuard)
   @Post()
   async createCategory(@Body() category: CategoryDto) {
     return this.CategoryService.createCategory(category);
   }
 
-  @UseGuards(AdminGuard)
   @Put(':id')
-  async updateCategory(@Body() category: Category) {
-    return this.CategoryService.updateCategory(category);
+  async updateCategory(@Param('id') id: number, @Body() category: CategoryDto) {
+    return await this.CategoryService.updateCategory(id, category);
   }
 
-  @UseGuards(AdminGuard)
   @Delete(':id')
-  async deleteCategory(@Body() param: { id: number }) {
-    return this.CategoryService.deleteCategory(param.id);
+  async deleteCategory(@Param('id') id: number) {
+    return this.CategoryService.deleteCategory(id);
   }
 }

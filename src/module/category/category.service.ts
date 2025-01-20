@@ -10,7 +10,7 @@ export class CategoryService {
     return this.categoryRepository.find();
   }
 
-  async getCategory(id: number) {
+  async getCategoryById(id: number) {
     return this.categoryRepository.findOneBy({
       id: id,
     });

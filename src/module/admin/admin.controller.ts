@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Put, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { AdminService } from './admin.service';
@@ -22,8 +22,8 @@ export class AdminController {
   }
 
   @Get(':id')
-  async getAdminById(@Req() req) {
-    return new Admin(await this.adminService.getAdminById(req.id));
+  async getAdminById(@Param() param: { id: number }) {
+    return new Admin(await this.adminService.getAdminById(param.id));
   }
 
   @Get()

@@ -11,10 +11,10 @@ import { AdminRepository } from './repository/admin.repository';
 import { SignUpAdminDto, SignUpUserDto } from './dto/signup.dto';
 import { SignInDto } from './dto/signin.dto';
 
-import { ERROR_MESSAGE } from 'src/constants/error-message';
 import { JwtService } from '@nestjs/jwt';
 import Admin from 'src/entities/admin.entity';
 import User from 'src/entities/user.entity';
+import { ErrorMsg } from 'src/constants/error-message';
 
 @Injectable()
 export class AuthService {
@@ -29,10 +29,7 @@ export class AuthService {
       email: req.email,
     });
     if (checkUserExist) {
-      throw new HttpException(
-        ERROR_MESSAGE.EMAIL_EXIST,
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new HttpException(ErrorMsg.EMAIL_EXIST, HttpStatus.BAD_REQUEST);
     }
     const user = this.userRepository.create(req);
 
@@ -52,7 +49,7 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new NotFoundException(ERROR_MESSAGE.ACCOUNT_NOT_FOUND);
+      throw new NotFoundException(ErrorMsg.ACCOUNT_NOT_FOUND);
     }
 
     return {
@@ -71,10 +68,7 @@ export class AuthService {
     });
 
     if (checkAdminExist) {
-      throw new HttpException(
-        ERROR_MESSAGE.EMAIL_EXIST,
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new HttpException(ErrorMsg.EMAIL_EXIST, HttpStatus.BAD_REQUEST);
     }
     const salt = await bcrypt.genSalt();
 
@@ -93,13 +87,13 @@ export class AuthService {
     });
 
     if (!admin) {
-      throw new NotFoundException(ERROR_MESSAGE.ACCOUNT_NOT_FOUND);
+      throw new NotFoundException(ErrorMsg.ACCOUNT_NOT_FOUND);
     }
     const isMatchPassword = await bcrypt.compare(req.password, admin.password);
 
     if (!isMatchPassword) {
       throw new HttpException(
-        ERROR_MESSAGE.ACCOUNT_NOT_FOUND,
+        ErrorMsg.ACCOUNT_NOT_FOUND,
         HttpStatus.BAD_REQUEST,
       );
     }
