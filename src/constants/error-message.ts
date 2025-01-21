@@ -1,7 +1,9 @@
 export enum ErrorMsg {
   //auth
-  ACCOUNT_NOT_FOUND = 'Email or password is incorrect',
+  ACCOUNT_NOT_FOUND = 'Account not found',
   EMAIL_EXIST = 'Email already exist, please use another email',
+  EMAIL_PASSWORD_NOT_FOUND = 'Email or password is incorrect',
+  CANNOT_UPDATE_EMAIL = 'Email is unique, cannot update the email',
 
   //user
   USER_NOT_FOUND = 'User not found',

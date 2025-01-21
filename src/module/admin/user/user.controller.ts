@@ -1,9 +1,17 @@
-import { Controller, Delete, Get, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
-import User from 'src/entities/user.entity';
 import AdminGuard from 'src/auth/guard/admin.guard';
+import { UpdateUserDto } from 'src/auth/dto/signup.dto';
 
 @Controller('/manage/users/')
 @UseGuards(AdminGuard)
@@ -18,17 +26,20 @@ export class UserController {
   }
 
   @Get(':id')
-  async getUserByAdmin(email: string) {
-    return await this.userService.getUserByAdmin(email);
+  async getUserByAdmin(@Param('id') id: number) {
+    return await this.userService.getUserByAdmin(id);
   }
 
   @Put(':id')
-  async updateUserByAdmin(id: number, data: User) {
+  async updateUserByAdmin(
+    @Param('id') id: number,
+    @Body() data: UpdateUserDto,
+  ) {
     return await this.userService.updateUserByAdmin(id, data);
   }
 
   @Delete(':id')
-  async deleteUserByAdmin(id: number) {
+  async deleteUserByAdmin(@Param('id') id: number) {
     return await this.userService.deleteUserByAdmin(id);
   }
 }

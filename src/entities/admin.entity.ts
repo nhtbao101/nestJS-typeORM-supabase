@@ -1,6 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('admin')
 export default class Admin {
@@ -44,4 +50,10 @@ export default class Admin {
 
   @ApiProperty()
   token?: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  toLowerCaseEmail() {
+    this.email = this.email.toLowerCase();
+  }
 }
