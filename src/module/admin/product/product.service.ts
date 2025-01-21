@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { ErrorMsg } from 'src/constants/error-message';
+import { Product } from 'src/entities/product.entity';
 import { ProductDto } from 'src/module/dto/product.dto';
 import CategoryRepository from 'src/repository/category.repository';
 import { ProductRepository } from 'src/repository/product.repository';
@@ -12,7 +13,7 @@ export class ProductService {
     private categoryRepository: CategoryRepository,
   ) {}
 
-  async getProduct() {
+  async getProduct(): Promise<Product[]> {
     return await this.productRepository.find();
   }
 

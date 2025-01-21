@@ -1,5 +1,6 @@
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -85,10 +86,12 @@ export class Product {
       nullable: true,
     },
   )
+  @Expose()
   @ApiProperty()
   @JoinColumn({ name: 'id' })
   variant?: any;
 
+  @Expose()
   @OneToMany(() => OrderItem, (orderItem: OrderItem) => orderItem.product, {
     nullable: true,
   })
@@ -98,6 +101,13 @@ export class Product {
 
   @BeforeInsert()
   createSlug() {
+    this.slug = generateSlug(
+      this.name + '-' + parseFloat(`${Math.random() * 1000}`).toFixed(2),
+    );
+  }
+
+  @BeforeUpdate()
+  updateSlug() {
     this.slug = generateSlug(
       this.name + '-' + parseFloat(`${Math.random() * 1000}`).toFixed(2),
     );

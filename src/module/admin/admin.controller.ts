@@ -7,6 +7,7 @@ import AdminGuard from 'src/auth/guard/admin.guard';
 import { Roles } from 'src/auth/decorator/role';
 import { Role } from 'src/constants/role';
 import { RolesGuard } from 'src/auth/guard/role.guard';
+import { SignUpAdminDto } from 'src/auth/dto/signup.dto';
 
 @Controller('/admin/')
 @UseGuards(AdminGuard, RolesGuard)
@@ -22,17 +23,12 @@ export class AdminController {
   }
 
   @Get(':id')
-  async getAdminById(@Param() param: { id: number }) {
-    return new Admin(await this.adminService.getAdminById(param.id));
-  }
-
-  @Get()
-  async getAdminByEmail(@Body() req) {
-    return new Admin(await this.adminService.getAdminByEmail(req.user.email));
+  async getAdminById(@Param('id') id: number) {
+    return new Admin(await this.adminService.getAdminById(id));
   }
 
   @Put(':id')
-  async updateAdmin(data: Admin) {
-    return await this.adminService.updateAdmin(data);
+  async updateAdmin(@Param('id') id: number, @Body() data: SignUpAdminDto) {
+    return await this.adminService.updateAdmin(id, data);
   }
 }

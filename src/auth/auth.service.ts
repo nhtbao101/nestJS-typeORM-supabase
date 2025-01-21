@@ -49,7 +49,7 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new NotFoundException(ErrorMsg.ACCOUNT_NOT_FOUND);
+      throw new NotFoundException(ErrorMsg.EMAIL_PASSWORD_NOT_FOUND);
     }
 
     return {
@@ -87,13 +87,13 @@ export class AuthService {
     });
 
     if (!admin) {
-      throw new NotFoundException(ErrorMsg.ACCOUNT_NOT_FOUND);
+      throw new NotFoundException(ErrorMsg.EMAIL_PASSWORD_NOT_FOUND);
     }
     const isMatchPassword = await bcrypt.compare(req.password, admin.password);
 
     if (!isMatchPassword) {
       throw new HttpException(
-        ErrorMsg.ACCOUNT_NOT_FOUND,
+        ErrorMsg.EMAIL_PASSWORD_NOT_FOUND,
         HttpStatus.BAD_REQUEST,
       );
     }

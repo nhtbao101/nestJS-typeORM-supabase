@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsEmail,
   IsInt,
@@ -44,6 +44,11 @@ export class SignUpUserDto {
   @IsInt()
   @ApiProperty({ example: 1 })
   userRole?: number;
+}
+
+export class UpdateUserDto extends PartialType(SignUpUserDto) {
+  @IsOptional()
+  password?: string;
 }
 
 export class SignUpAdminDto {

@@ -1,7 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import { IsOptional } from 'class-validator';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Order } from './order.entity';
 
 @Entity()
@@ -58,4 +65,10 @@ export default class User {
 
   @ApiProperty()
   token?: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  toLowerCaseEmail() {
+    this.email = this.email.toLowerCase();
+  }
 }

@@ -1,4 +1,5 @@
 import {
+  AfterUpdate,
   BeforeInsert,
   Column,
   Entity,
@@ -36,6 +37,14 @@ export class Category {
 
   @BeforeInsert()
   createSlug() {
+    this.slug = generateSlug(
+      this.name + '-' + parseFloat(`${Math.random() * 1000}`).toFixed(2),
+    );
+  }
+
+  @AfterUpdate()
+  updateSlug() {
+    console.log('name', this.name);
     this.slug = generateSlug(
       this.name + '-' + parseFloat(`${Math.random() * 1000}`).toFixed(2),
     );
