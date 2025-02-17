@@ -47,7 +47,6 @@ export class OrderService {
           );
         }
 
-        this;
         return product;
       }),
     );
