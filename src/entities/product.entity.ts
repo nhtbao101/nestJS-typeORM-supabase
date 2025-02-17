@@ -17,6 +17,7 @@ import { OrderItem } from './order-item.entity';
 import { Variant } from './variant.entity';
 import { Category } from './category.entity';
 import { generateSlug } from 'src/shared/helper';
+import { Image } from './image.entity';
 
 @Entity()
 export class Product {
@@ -42,11 +43,6 @@ export class Product {
 
   @Expose()
   @Column()
-  @ApiProperty()
-  image: string;
-
-  @Expose()
-  @Column()
   @ApiProperty({ example: 2 })
   price: number;
 
@@ -54,6 +50,21 @@ export class Product {
   @Column()
   @ApiProperty()
   quantity: number;
+
+  @Expose()
+  @Column()
+  @ApiProperty()
+  discount: number;
+
+  @Expose()
+  @Column({ name: 'sold_count' })
+  @ApiProperty({ name: 'sold_count' })
+  soldCount: number;
+
+  @Expose()
+  @Column()
+  @ApiProperty()
+  thumbnail: string;
 
   @Expose()
   @Column({ name: 'category_id' })
@@ -76,10 +87,15 @@ export class Product {
   @ApiProperty()
   category: Category;
 
+  @Expose()
+  @OneToMany(() => Image, (image) => image.product)
+  // @JoinColumn({ name: 'id' })
+  @ApiProperty()
+  image: Image[];
+
   @OneToMany(
     () => Variant,
     (variant) => {
-      console.log('variant', variant);
       return variant.product;
     },
     {

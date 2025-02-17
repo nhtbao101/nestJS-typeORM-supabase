@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ErrorMsg } from 'src/constants/error-message';
 
-import { ProductRepository } from 'src/repository/product.repository';
+import ProductRepository from 'src/repository/product.repository';
 
 @Injectable()
 export class ProductService {
@@ -10,9 +11,14 @@ export class ProductService {
     return await this.productRepository.find();
   }
 
-  async getProductById(id: number) {
-    return await this.productRepository.findOneBy({
-      id: id,
+  async getProductBySlug(slug: string) {
+    const product = await this.productRepository.findOneBy({
+      slug: slug,
     });
+
+    if (!product) {
+      throw new HttpException(ErrorMsg.PRODUCT_NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+    return product;
   }
 }

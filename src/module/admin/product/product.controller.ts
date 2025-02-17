@@ -29,21 +29,21 @@ export class ProductController {
   }
 
   @Get(':id')
-  async getProductById(@Param('id') id: number) {
-    return await this.productService.getProductById(id);
+  async getProductBySlug(@Param('slug') slug: string) {
+    return await this.productService.getProductBySlug(slug);
   }
 
   @UseGuards(AdminGuard)
   @ApiBearerAuth()
   @Put(':id/update')
-  async updateProduct(@Param('id') id: number, @Body() data: ProductDto) {
-    return await this.productService.updateProduct(id, data);
+  async updateProduct(@Param('slug') slug: string, @Body() data: ProductDto) {
+    return await this.productService.updateProduct(slug, data);
   }
 
   @UseGuards(AdminGuard)
   @ApiBearerAuth()
   @Delete(':id/delete')
-  async deleteProduct(@Param('id') id: number) {
-    return await this.productService.deleteProduct(id);
+  async deleteProduct(@Param('id') slug: string) {
+    return await this.productService.deleteProduct(slug);
   }
 }

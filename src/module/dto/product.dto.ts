@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsArray,
   IsInt,
   IsNotEmpty,
   IsOptional,
@@ -10,6 +11,7 @@ import {
 import { Expose, Transform } from 'class-transformer';
 
 import { VariantDto } from './variant';
+import { Image } from 'src/entities/image.entity';
 
 export class ProductDto {
   @Length(5, 100)
@@ -45,10 +47,10 @@ export class ProductDto {
   })
   categoryId: number;
 
-  @IsString()
+  @IsArray()
   @IsNotEmpty()
-  @ApiProperty({ example: 'https://picsum.photos/200' })
-  image: string;
+  @ApiProperty({ example: ['https://picsum.photos/200'] })
+  image: Image[];
 
   @IsOptional()
   // @IsArray()
