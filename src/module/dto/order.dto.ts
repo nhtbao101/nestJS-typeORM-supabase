@@ -1,13 +1,13 @@
+import {
+  IsArray,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
-import { Column } from 'typeorm';
 
 export class OrderDto {
-  @Column({ name: 'order_date' })
-  @IsNotEmpty()
-  orderDate: Date;
-
-  @Column()
   @IsInt()
   @IsNotEmpty()
   @ApiProperty({ example: 1 })
@@ -15,23 +15,37 @@ export class OrderDto {
 
   @IsInt()
   @IsNotEmpty()
-  @Min(0)
-  @ApiProperty({ example: 0 })
-  total: number;
+  @ApiProperty({ example: 1 })
+  customerId: number;
 
-  @Column({ name: 'shipping_date' })
+  @IsNotEmpty()
+  @IsArray()
+  @ApiProperty({
+    example: [
+      { productId: 13, quantity: 2 },
+      { productId: 8, quantity: 4 },
+    ],
+  })
+  orderItems: any;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({ example: 'Just a note' })
+  note: string;
+
   @IsNotEmpty()
   @ApiProperty({ name: 'shipping_date' })
   shippingDate: Date;
 
-  @Column({ name: 'shipping_received_date' })
   @IsNotEmpty()
   @ApiProperty({ name: 'shipping_received_date' })
   shippingReceivedDate: Date;
 
   @IsString()
-  @Column({ name: 'shipping_address' })
   @IsNotEmpty()
-  @ApiProperty({ name: 'shipping_address' })
+  @ApiProperty({
+    name: 'shipping_address',
+    example: '23 An Nhon 11, Son Tra, Da Nang',
+  })
   shippingAddress: string;
 }

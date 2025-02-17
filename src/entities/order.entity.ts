@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -11,15 +12,10 @@ import {
 import { OrderItem } from './order-item.entity';
 import { Payment } from './payment.entity';
 import User from './user.entity';
-
 @Entity()
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
-
-  //missing in db
-  // @Column()
-  // slug: string;
 
   @Column({ name: 'customer_id' })
   customerId: number;
@@ -27,14 +23,17 @@ export class Order {
   @Column()
   status: number;
 
-  @Column({ name: 'order_date' })
-  orderDate: Date;
-
   @Column()
   total: number;
 
-  @Column({ name: 'created_at' })
+  @Column()
+  note: string;
+
+  @CreateDateColumn({ name: 'created_at', default: () => 'NOW()' })
   createdAt: Date;
+
+  @CreateDateColumn({ name: 'order_date', default: () => 'NOW()' })
+  orderDate: Date;
 
   @Column({ name: 'updated_at' })
   updatedAt: Date;
@@ -45,7 +44,10 @@ export class Order {
   @Column({ name: 'shipping_received_date' })
   shippingReceivedDate: Date;
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem)
+  @Column({ name: 'shipping_address' })
+  shippingAddress: string;
+
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
   orderItems: OrderItem[];
 
   @OneToOne(() => Payment, (payment) => payment.order, {

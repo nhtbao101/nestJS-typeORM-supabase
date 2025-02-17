@@ -1,14 +1,13 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
-import AdminGuard from 'src/auth/guard/admin.guard';
 import UserGuard from 'src/auth/guard/user.guard';
 import { OrderService } from './order.service';
 import { OrderDto } from '../dto/order.dto';
 
 @Controller('/order/')
 @ApiBearerAuth()
-@UseGuards(AdminGuard, UserGuard)
+@UseGuards(UserGuard)
 export class OrderController {
   constructor(private orderService: OrderService) {}
 
@@ -18,8 +17,8 @@ export class OrderController {
   }
 
   @Get(':id')
-  async getOrderById(@Param() param: { id: number }) {
-    return this.orderService.getOrderById(param.id);
+  async getOrderById(@Param('id') id: number) {
+    return this.orderService.getOrderById(id);
   }
 
   @Post()

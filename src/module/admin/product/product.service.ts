@@ -4,22 +4,24 @@ import { ErrorMsg } from 'src/constants/error-message';
 import { Product } from 'src/entities/product.entity';
 import { ProductDto } from 'src/module/dto/product.dto';
 import CategoryRepository from 'src/repository/category.repository';
-import { ProductRepository } from 'src/repository/product.repository';
+import ImageRepository from 'src/repository/image.repository';
+import ProductRepository from 'src/repository/product.repository';
 
 @Injectable()
 export class ProductService {
   constructor(
     private productRepository: ProductRepository,
     private categoryRepository: CategoryRepository,
+    private imageRepository: ImageRepository,
   ) {}
 
   async getProduct(): Promise<Product[]> {
     return await this.productRepository.find();
   }
 
-  async getProductById(id: number) {
+  async getProductBySlug(slug: string) {
     const product = await this.productRepository.findOneBy({
-      id: id,
+      slug: slug,
     });
 
     if (!product) {
@@ -45,11 +47,18 @@ export class ProductService {
       );
     }
     const newPrd = this.productRepository.create(req);
-    return await this.productRepository.save(newPrd);
+    await this.productRepository.save(newPrd);
+
+    const imgEntity = req.image.map((img) =>
+      this.imageRepository.create({ ...img, product: newPrd }),
+    );
+    await this.imageRepository.save(imgEntity);
+
+    return { ...newPrd, image: imgEntity };
   }
 
-  async updateProduct(id: number, data: ProductDto) {
-    const product = await this.getProductById(id);
+  async updateProduct(slug: string, data: ProductDto) {
+    const product = await this.getProductBySlug(slug);
 
     const category = await this.categoryRepository.findOneBy({
       id: data.categoryId,
@@ -66,11 +75,11 @@ export class ProductService {
     return result;
   }
 
-  async deleteProduct(id: number) {
-    await this.getProductById(id);
+  async deleteProduct(slug: string) {
+    await this.getProductBySlug(slug);
 
     const result = await this.productRepository.delete({
-      id: id,
+      slug: slug,
     });
 
     return result.affected > 0;
