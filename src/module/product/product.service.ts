@@ -8,7 +8,12 @@ export class ProductService {
   constructor(private productRepository: ProductRepository) {}
 
   async getProduct() {
-    return await this.productRepository.find();
+    const prd = await this.productRepository.find({
+      relations: {
+        images: true,
+      },
+    });
+    return prd;
   }
 
   async getProductBySlug(slug: string) {

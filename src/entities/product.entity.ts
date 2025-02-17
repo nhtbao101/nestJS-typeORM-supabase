@@ -88,10 +88,8 @@ export class Product {
   category: Category;
 
   @Expose()
-  @OneToMany(() => Image, (image) => image.product)
-  // @JoinColumn({ name: 'id' })
-  @ApiProperty()
-  image: Image[];
+  @OneToMany(() => Image, (images) => images.product)
+  images: Image[];
 
   @OneToMany(
     () => Variant,
