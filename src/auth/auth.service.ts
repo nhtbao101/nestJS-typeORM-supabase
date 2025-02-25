@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -87,15 +88,12 @@ export class AuthService {
     });
 
     if (!admin) {
-      throw new NotFoundException(ErrorMsg.EMAIL_PASSWORD_NOT_FOUND);
+      throw new BadRequestException(ErrorMsg.EMAIL_PASSWORD_NOT_FOUND);
     }
     const isMatchPassword = await bcrypt.compare(req.password, admin.password);
 
     if (!isMatchPassword) {
-      throw new HttpException(
-        ErrorMsg.EMAIL_PASSWORD_NOT_FOUND,
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new BadRequestException(ErrorMsg.EMAIL_PASSWORD_NOT_FOUND);
     }
 
     return {
