@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { ErrorMsg } from 'src/constants/error-message';
 import { Product } from 'src/entities/product.entity';
+import { ImageDto } from 'src/module/dto/image.dto';
 import { ProductDto } from 'src/module/dto/product.dto';
 import CategoryRepository from 'src/repository/category.repository';
 import ImageRepository from 'src/repository/image.repository';
@@ -49,9 +50,15 @@ export class ProductService {
     const newPrd = this.productRepository.create(req);
     await this.productRepository.save(newPrd);
 
-    const imgEntity = req.image.map((img) =>
-      this.imageRepository.create({ ...img, product: newPrd }),
-    );
+    const imgEntity = req.images.map((img: ImageDto) => {
+      const result = this.imageRepository.create({
+        url: img.url,
+        imageName: img.imageName,
+        product: newPrd,
+      });
+      return result;
+    });
+
     await this.imageRepository.save(imgEntity);
 
     return { ...newPrd, image: imgEntity };

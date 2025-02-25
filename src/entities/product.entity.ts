@@ -67,6 +67,11 @@ export class Product {
   thumbnail: string;
 
   @Expose()
+  @Column()
+  @ApiProperty()
+  status: number;
+
+  @Expose()
   @Column({ name: 'category_id' })
   @ApiProperty({ name: 'category_id' })
   categoryId: number;

@@ -11,10 +11,10 @@ import {
 import { Expose, Transform } from 'class-transformer';
 
 import { VariantDto } from './variant';
-import { Image } from 'src/entities/image.entity';
+import { ImageDto } from './image.dto';
 
 export class ProductDto {
-  @Length(5, 100)
+  @Length(2, 100)
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: 'Product name' })
@@ -40,6 +40,11 @@ export class ProductDto {
 
   @IsInt()
   @IsNotEmpty()
+  @ApiProperty({ example: 99 })
+  status: number;
+
+  @IsInt()
+  @IsNotEmpty()
   @Expose({ name: 'category_id' })
   @ApiProperty({ example: 1, name: 'category_id' })
   @Transform((value) => {
@@ -50,7 +55,7 @@ export class ProductDto {
   @IsArray()
   @IsNotEmpty()
   @ApiProperty({ example: ['https://picsum.photos/200'] })
-  image: Image[];
+  images: ImageDto[];
 
   @IsOptional()
   // @IsArray()

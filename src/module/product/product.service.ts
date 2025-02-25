@@ -12,13 +12,28 @@ export class ProductService {
       relations: {
         images: true,
       },
+      order: {
+        images: {
+          id: 'ASC',
+        },
+      },
     });
     return prd;
   }
 
   async getProductBySlug(slug: string) {
-    const product = await this.productRepository.findOneBy({
-      slug: slug,
+    const product = await this.productRepository.findOne({
+      where: {
+        slug: slug,
+      },
+      relations: {
+        images: true,
+      },
+      order: {
+        images: {
+          id: 'ASC',
+        },
+      },
     });
 
     if (!product) {
