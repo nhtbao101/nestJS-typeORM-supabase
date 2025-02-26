@@ -18,6 +18,7 @@ export class ProductService {
         },
       },
     });
+    console.log('prd', prd);
     return prd;
   }
 
