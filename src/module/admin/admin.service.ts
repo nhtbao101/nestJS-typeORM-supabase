@@ -1,8 +1,8 @@
 import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
-import { SignUpAdminDto } from 'src/auth/dto/signup.dto';
+import { SignUpAdminDto } from '../../auth/dto/signup.dto';
 
-import { AdminRepository } from 'src/auth/repository/admin.repository';
-import { ErrorMsg } from 'src/constants/error-message';
+import { AdminRepository } from '../../auth/repository/admin.repository';
+import { ErrorMsg } from '../../constants/error-message';
 
 @Injectable()
 export class AdminService {

@@ -3,11 +3,11 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { AdminService } from './admin.service';
 import Admin from '../../entities/admin.entity';
-import AdminGuard from 'src/auth/guard/admin.guard';
-import { Roles } from 'src/auth/decorator/role';
-import { Role } from 'src/constants/role';
-import { RolesGuard } from 'src/auth/guard/role.guard';
-import { SignUpAdminDto } from 'src/auth/dto/signup.dto';
+import AdminGuard from '../../auth/guard/admin.guard';
+import { Roles } from '../../auth/decorator/role';
+import { Role } from '../../constants/role';
+import { RolesGuard } from '../../auth/guard/role.guard';
+import { SignUpAdminDto } from '../../auth/dto/signup.dto';
 
 @Controller('/admin/')
 @UseGuards(AdminGuard, RolesGuard)

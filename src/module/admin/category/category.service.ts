@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ErrorMsg } from './../../../constants/error-message';
 
-import { CategoryDto } from 'src/module/dto/category.dto';
-import CategoryRepository from 'src/repository/category.repository';
+import { CategoryDto } from '../../../module/dto/category.dto';
+import CategoryRepository from '../../../repository/category.repository';
 
 @Injectable()
 export class CategoryService {

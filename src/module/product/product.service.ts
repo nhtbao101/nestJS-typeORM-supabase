@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ErrorMsg } from 'src/constants/error-message';
+import { ErrorMsg } from '../../constants/error-message';
 
-import ProductRepository from 'src/repository/product.repository';
+import ProductRepository from '../../repository/product.repository';
 
 @Injectable()
 export class ProductService {

@@ -11,8 +11,8 @@ import {
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { CategoryService } from './category.service';
-import AdminGuard from 'src/auth/guard/admin.guard';
-import { CategoryDto } from 'src/module/dto/category.dto';
+import AdminGuard from '../../../auth/guard/admin.guard';
+import { CategoryDto } from '../../../module/dto/category.dto';
 
 @Controller('/manage/category/')
 @ApiBearerAuth()

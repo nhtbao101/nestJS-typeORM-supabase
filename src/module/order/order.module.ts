@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
-import OrderRepository from 'src/repository/order.repository';
+import OrderRepository from '../../repository/order.repository';
 import { ProductService } from '../product/product.service';
-import ProductRepository from 'src/repository/product.repository';
+import ProductRepository from '../../repository/product.repository';
 
 @Module({
   controllers: [OrderController],

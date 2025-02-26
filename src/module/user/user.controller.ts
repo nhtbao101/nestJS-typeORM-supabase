@@ -3,7 +3,7 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
 import User from '../../entities/user.entity';
-import UserGuard from 'src/auth/guard/user.guard';
+import UserGuard from '../../auth/guard/user.guard';
 
 @Controller('/users/')
 @ApiBearerAuth()

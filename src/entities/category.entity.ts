@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Product } from './product.entity';
-import { generateSlug } from 'src/shared/helper';
+import { generateSlug } from '../shared/helper';
 
 @Entity()
 export class Category {

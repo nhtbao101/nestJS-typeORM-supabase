@@ -11,8 +11,8 @@ import {
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { ProductService } from './product.service';
-import AdminGuard from 'src/auth/guard/admin.guard';
-import { ProductDto } from 'src/module/dto/product.dto';
+import AdminGuard from '../../../auth/guard/admin.guard';
+import { ProductDto } from '../../../module/dto/product.dto';
 
 @Controller('/manage/product/')
 export class ProductController {

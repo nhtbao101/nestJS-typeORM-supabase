@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
-import UserGuard from 'src/auth/guard/user.guard';
+import UserGuard from '../../auth/guard/user.guard';
 import { OrderService } from './order.service';
 import { OrderDto } from '../dto/order.dto';
 

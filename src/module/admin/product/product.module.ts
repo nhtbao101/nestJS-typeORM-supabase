@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
-import ProductRepository from 'src/repository/product.repository';
+import ProductRepository from '../../../repository/product.repository';
 import { CategoryService } from '../category/category.service';
-import CategoryRepository from 'src/repository/category.repository';
-import ImageRepository from 'src/repository/image.repository';
+import CategoryRepository from '../../../repository/category.repository';
+import ImageRepository from '../../../repository/image.repository';
 
 @Module({
   controllers: [ProductController],
