@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/auth/repository/user.repository';
 import { ErrorMsg } from 'src/constants/error-message';
 
-import User from 'src/entities/user.entity';
+import User from '../../entities/user.entity';
 
 @Injectable()
 export class UserService {

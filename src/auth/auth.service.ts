@@ -13,9 +13,9 @@ import { SignUpAdminDto, SignUpUserDto } from './dto/signup.dto';
 import { SignInDto } from './dto/signin.dto';
 
 import { JwtService } from '@nestjs/jwt';
-import Admin from 'src/entities/admin.entity';
-import User from 'src/entities/user.entity';
-import { ErrorMsg } from 'src/constants/error-message';
+import Admin from '../entities/admin.entity';
+import User from '../entities/user.entity';
+import { ErrorMsg } from '../constants/error-message';
 
 @Injectable()
 export class AuthService {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 
-import Admin from 'src/entities/admin.entity';
+import Admin from '../../entities/admin.entity';
 
 @Injectable()
 export class AdminRepository extends Repository<Admin> {

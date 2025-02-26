@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import { ErrorMsg } from 'src/constants/error-message';
-import { Product } from 'src/entities/product.entity';
+import { Product } from '../../../entities/product.entity';
 import { ImageDto } from 'src/module/dto/image.dto';
 import { ProductDto } from 'src/module/dto/product.dto';
 import CategoryRepository from 'src/repository/category.repository';

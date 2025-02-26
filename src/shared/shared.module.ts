@@ -4,9 +4,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AdminRepository } from 'src/auth/repository/admin.repository';
-import { UserRepository } from 'src/auth/repository/user.repository';
-import Admin from 'src/entities/admin.entity';
+import { AdminRepository } from '../auth/repository/admin.repository';
+import { UserRepository } from '../auth/repository/user.repository';
+import Admin from '../entities/admin.entity';
 
 @Global()
 @Module({

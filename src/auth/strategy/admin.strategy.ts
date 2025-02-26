@@ -4,8 +4,9 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { SignInDto } from '../dto/signin.dto';
 import { AdminRepository } from '../repository/admin.repository';
-import Admin from 'src/entities/admin.entity';
-import { ErrorMsg } from 'src/constants/error-message';
+
+import Admin from '../../entities/admin.entity';
+import { ErrorMsg } from '../../constants/error-message';
 
 @Injectable()
 export class AdminStrategy extends PassportStrategy(Strategy, 'admin-jwt') {
