@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
-import { ErrorMsg } from 'src/constants/error-message';
+import { ErrorMsg } from '../../../constants/error-message';
 import { Product } from '../../../entities/product.entity';
-import { ImageDto } from 'src/module/dto/image.dto';
-import { ProductDto } from 'src/module/dto/product.dto';
-import CategoryRepository from 'src/repository/category.repository';
-import ImageRepository from 'src/repository/image.repository';
-import ProductRepository from 'src/repository/product.repository';
+import { ImageDto } from '../../../module/dto/image.dto';
+import { ProductDto } from '../../../module/dto/product.dto';
+import CategoryRepository from '../../../repository/category.repository';
+import ImageRepository from '../../../repository/image.repository';
+import ProductRepository from '../../../repository/product.repository';
 
 @Injectable()
 export class ProductService {

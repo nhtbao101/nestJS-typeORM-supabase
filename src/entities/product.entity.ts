@@ -16,7 +16,7 @@ import { Expose } from 'class-transformer';
 import { OrderItem } from './order-item.entity';
 import { Variant } from './variant.entity';
 import { Category } from './category.entity';
-import { generateSlug } from 'src/shared/helper';
+import { generateSlug } from '../shared/helper';
 import { Image } from './image.entity';
 
 @Entity()

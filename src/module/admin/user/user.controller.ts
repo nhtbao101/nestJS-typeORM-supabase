@@ -10,8 +10,8 @@ import {
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { UserService } from './user.service';
-import AdminGuard from 'src/auth/guard/admin.guard';
-import { UpdateUserDto } from 'src/auth/dto/signup.dto';
+import AdminGuard from '../../../auth/guard/admin.guard';
+import { UpdateUserDto } from '../../../auth/dto/signup.dto';
 
 @Controller('/manage/users/')
 @UseGuards(AdminGuard)

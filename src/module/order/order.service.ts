@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
-import OrderRepository from 'src/repository/order.repository';
+import OrderRepository from '../../repository/order.repository';
 import { OrderDto } from '../dto/order.dto';
-import ProductRepository from 'src/repository/product.repository';
-import { UserRepository } from 'src/auth/repository/user.repository';
-import { ErrorMsg } from 'src/constants/error-message';
+import ProductRepository from '../../repository/product.repository';
+import { UserRepository } from '../../auth/repository/user.repository';
+import { ErrorMsg } from '../../constants/error-message';
 
 @Injectable()
 export class OrderService {
