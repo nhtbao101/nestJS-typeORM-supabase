@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { AdminService } from './admin.service';
-import Admin from 'src/entities/admin.entity';
+import Admin from '../../entities/admin.entity';
 import AdminGuard from 'src/auth/guard/admin.guard';
 import { Roles } from 'src/auth/decorator/role';
 import { Role } from 'src/constants/role';
